@@ -653,7 +653,7 @@ namespace Sosu.Services
                 if (beatmap.total_length() < 60) commentsStr += $"{language.command_lastScoreSuka_lowDuration()}\n";
                 if (double.Parse(item.maxcombo) / double.Parse(beatmap.max_combo) >= 0.9 && int.Parse(item.countmiss) >= 1) commentsStr += $"{language.command_lastScoreSuka_shitMisses()}\n";
                 if (int.Parse(beatmap.count_slider) >= int.Parse(beatmap.count_normal)) commentsStr += $"{language.command_lastScoreSuka_manySliders()}\n";
-                if (beatmap.title.Length >= 60) commentsStr += $"{language.command_lastScoreSuka_mapTitleTooLong()}\n";
+                if (beatmap.title.Split(" ").Length >= 5) commentsStr += $"{language.command_lastScoreSuka_mapTitleTooLong()}\n";
                 if (usersPP < 3000)
                 {
                     if (double.Parse(beatmap.difficultyrating) <= 2) commentsStr += $"{language.command_lastScoreSuka_tooEasyMapForPlayer()}";

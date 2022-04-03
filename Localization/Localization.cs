@@ -47,6 +47,7 @@ namespace Sosu.Localization
                 $"/set [nickname] - добавить\\изменить свой ник в боте.\n" +
                 $"/user [nickname] - краткая информация об игроке.\n" +
                 $"/last [nickname] [count] - последние сыгранные игры.\n" +
+                $"/lss [nickname] [count] - последние сыгранные игры. (нестандартная альтернатива)\n" +
                 $"/score [beatmap_link] - ваши рекорды на этой карте.\n" +
                 $"/userbest [nickname] [mode] - лучшие игры игрока.\n" +
                 $"/compare [nickname1] [nickname2] [mode] - сравнить игроков. [mode]: 0-std, 1-taiko, 2-catch, 3-mania\n" +
@@ -139,6 +140,7 @@ namespace Sosu.Localization
                 $"/set [nickname] - add\\change your nickname in the bot.\n" +
                 $"/user [nickname] - brief information about the player.\n" +
                 $"/last [nickname] [count] - last played games.\n" +
+                $"/lss [nickname] [count] - last played games. (non-standard alternative)\n" +
                 $"/score [beatmap_link] - your records on this map.\n" +
                 $"/userbest [nickname] [mode] - best player games.\n" +
                 $"/compare [nickname1] [nickname2] [mode] - compare players.\n" +
