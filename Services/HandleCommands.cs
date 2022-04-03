@@ -185,7 +185,7 @@ namespace Sosu.Services
                 //{Other.ppCalc1(long.Parse(beatmap.beatmap_id), item.accuracy(), (OppaiSharp.Mods)mods, int.Parse(item.count100), int.Parse(item.count50), int.Parse(item.countmiss), int.Parse(item.maxcombo)),
                 //Other.ppCalc1(long.Parse(beatmap.beatmap_id), item.accuracy(), (OppaiSharp.Mods)mods, int.Parse(item.count100), int.Parse(item.count50), 0, int.Parse(beatmap.max_combo))};
                 double[] curpp = Other.ppCalc(long.Parse(beatmap.beatmap_id), item.accuracy(), (OppaiSharp.Mods)mods, int.Parse(item.countmiss), int.Parse(item.maxcombo));
-                textToSend += Langs.ReplaceEmpty(language.command_last(), new[] { $"{i + 1}", $"{item.rank}", $"{item.beatmap_id}", $"{beatmap.title}", $"{beatmap.version}", $"{beatmap.GetApproved()}", $"{item.count300}", $"{item.count100}", $"{item.count50}", $"{item.countmiss}", $"{item.accuracy():N2}", $"{mods}", $"{item.maxcombo}", $"{beatmap.max_combo}", $"{curpp[0]:N2}", $"{curpp[1]:N2}", $"{DateTimeOffset.Parse(item.date).AddHours(5):dd.MM.yyyy HH:mm zzz}", $"{item.completion(beatmap.countobjects()):N1}" });
+                textToSend += Langs.ReplaceEmpty(language.command_last(), new[] { $"{i + 1}", $"{item.rank}", $"{item.beatmap_id}", $"{beatmap.title}", $"{beatmap.version}", $"{beatmap.GetApproved()}", $"{item.count300}", $"{item.count100}", $"{item.count50}", $"{item.countmiss}", $"{item.accuracy():N2}", $"{mods}", $"{item.maxcombo}", $"{beatmap.max_combo}", $"{curpp[0]:N2}", $"{curpp[1]:N2}", $"{DateTimeOffset.Parse(item.date):dd.MM.yyyy HH:mm zzz}", $"{item.completion(beatmap.countobjects()):N1}" });
                 i++;
             }
             await Variables.db.InsertOrUpdateOsuChatsTable(chat.lastBeatmap_id, chat.chat.Id, 0, chat.members);
@@ -674,7 +674,7 @@ namespace Sosu.Services
                     if (double.Parse(beatmap.difficultyrating) <= 5) commentsStr += $"{language.command_lastScoreSuka_tooEasyMapForPlayer()}";
                     else if (double.Parse(beatmap.difficultyrating) >= 8) commentsStr += $"{language.command_lastScoreSuka_tooHardMapForPlayer()}";
                 }
-                textToSend += Langs.ReplaceEmpty(language.command_lastScoreSuka(), new[] { $"<a href=\"https://osu.ppy.sh/beatmaps/{beatmap.beatmap_id}\">{beatmap.title} [{beatmap.version}]</a>", $"{DateTimeOffset.Parse(item.date).AddHours(5):dd.MM.yyyy HH:mm zzz}", $"{item.rank}", $"{rankStr}", $"{commentsStr}" });
+                textToSend += Langs.ReplaceEmpty(language.command_lastScoreSuka(), new[] { $"<a href=\"https://osu.ppy.sh/beatmaps/{beatmap.beatmap_id}\">{beatmap.title} [{beatmap.version}]</a>", $"{DateTimeOffset.Parse(item.date):dd.MM.yyyy HH:mm zzz}", $"{item.rank}", $"{rankStr}", $"{commentsStr}" });
                 i++;
             }
             await Variables.db.InsertOrUpdateOsuChatsTable(chat.lastBeatmap_id, chat.chat.Id, 0, chat.members);
