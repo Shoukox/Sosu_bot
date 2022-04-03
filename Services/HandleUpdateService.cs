@@ -103,8 +103,8 @@ namespace Sosu.Services
             if (chat == default)
             {
                 Variables.chats.Add(new Sosu.Types.Chat(message.Chat, 0));
-                await Variables.db.InsertOrUpdateOsuChatsTable(0, message.Chat.Id, 1, chat.members);
                 chat = Variables.chats.Last();
+                await Variables.db.InsertOrUpdateOsuChatsTable(0, message.Chat.Id, 1, chat.members);
             }
             else
             {
