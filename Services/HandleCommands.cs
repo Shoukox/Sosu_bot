@@ -103,7 +103,7 @@ namespace Sosu.Services
         {
             var chat = Variables.chats.FirstOrDefault(m => m.chat.Id == msg.Chat.Id);
             Localization.ILocalization language = Langs.GetLang(chat.language);
-            await bot.SendTextMessageAsync(msg.Chat.Id, language.command_start());
+            await bot.SendTextMessageAsync(msg.Chat.Id, language.command_start(), parseMode: ParseMode.Html);
         }
         public static async Task Help(ITelegramBotClient bot, Message msg)
         {
@@ -120,7 +120,7 @@ namespace Sosu.Services
             ILocalization language = Langs.GetLang(chat.language);
             string osunickname = "";
 
-            Message message = await bot.SendTextMessageAsync(msg.Chat.Id, language.waiting(), replyToMessageId: msg.MessageId);
+            Message message = await bot.SendTextMessageAsync(msg.Chat.Id, language.waiting(), replyToMessageId: msg.MessageId, parseMode: ParseMode.Html);
             string[] splittedMessage = msg.Text.Split(" ");
 
 
@@ -216,7 +216,7 @@ namespace Sosu.Services
 
             }
             string sendText = Langs.ReplaceEmpty(language.command_set(), new[] { $"{name}" });
-            await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
+            await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId, parseMode: ParseMode.Html);
         }
         public static async Task OsuScore(ITelegramBotClient bot, Message msg)
         {
@@ -227,7 +227,7 @@ namespace Sosu.Services
             string osunickname = "";
             ILocalization language = Langs.GetLang(chat.language);
 
-            Message message = await bot.SendTextMessageAsync(msg.Chat.Id, language.waiting(), replyToMessageId: msg.MessageId);
+            Message message = await bot.SendTextMessageAsync(msg.Chat.Id, language.waiting(), replyToMessageId: msg.MessageId, parseMode: ParseMode.Html);
             string[] splittedMessage = msg.Text.Split(" ");
 
             if (user == default)
