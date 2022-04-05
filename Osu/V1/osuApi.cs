@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Sosu.osu.V1.Enums;
 using Sosu.osu.V1.Types;
+using System;
 
 namespace Sosu.osu.V1
 {
@@ -145,6 +146,7 @@ namespace Sosu.osu.V1
                 {
                     mods = CalculateModsForBeatmap(mods);
                     string doc = wc.DownloadString($"https://osu.ppy.sh/api/get_beatmaps?k={token}&b={beatmap_id}&mods={mods}");
+                    Console.WriteLine(doc);
                     if (doc.Length == 2) return null;
                     var data = JsonConvert.DeserializeObject<Beatmap[]>(doc)[0];
                     data._mode = mods.ToString();
@@ -178,6 +180,7 @@ namespace Sosu.osu.V1
                 {
                     string doc = wc.DownloadString($"https://osu.ppy.sh/api/get_scores?k={token}&u={name}&b={beatmap_id}");
                     if (doc.Length == 2) return null;
+                    Console.WriteLine(doc);
                     returndata = JsonConvert.DeserializeObject<Score[]>(doc);
                 }
                 return returndata;

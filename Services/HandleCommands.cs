@@ -345,7 +345,7 @@ namespace Sosu.Services
                 else
                     curpp = Other.ppCalc(beatmap_id, accuracy, (OppaiSharp.Mods)mods, int.Parse(item.countmiss), int.Parse(item.maxcombo))[0];
                 beatmap.ParseHTML();
-                textToSend += Langs.ReplaceEmpty(language.command_score(), new[] { $"{item.rank}", $"{item.beatmap_id}", $"{beatmap.title}", $"{beatmap.version}", $"{beatmap.GetApproved()}", $"{item.count300}", $"{item.count100}", $"{item.count50}", $"{item.countmiss}", $"{item.accuracy():N2}", $"{mods}", $"{item.maxcombo}", $"{beatmap.max_combo}", $"{curpp:N2}", $"{DateTimeOffset.Parse(item.date).AddHours(5):dd.MM.yyyy HH:mm zzz}" });
+                textToSend += Langs.ReplaceEmpty(language.command_score(), new[] { $"{item.rank}", $"{beatmap_id}", $"{beatmap.title}", $"{beatmap.version}", $"{beatmap.GetApproved()}", $"{item.count300}", $"{item.count100}", $"{item.count50}", $"{item.countmiss}", $"{item.accuracy():N2}", $"{mods}", $"{item.maxcombo}", $"{beatmap.max_combo}", $"{curpp:N2}", $"{DateTimeOffset.Parse(item.date).AddHours(5):dd.MM.yyyy HH:mm zzz}" });
                 i++;
             }
             await Variables.db.InsertOrUpdateOsuChatsTable(chat.lastBeatmap_id, chat.chat.Id, 0, chat.members);
@@ -654,6 +654,8 @@ namespace Sosu.Services
                 if (double.Parse(item.maxcombo) / double.Parse(beatmap.max_combo) >= 0.9 && int.Parse(item.countmiss) >= 1) commentsStr += $"{language.command_lastScoreSuka_shitMisses()}\n";
                 if (int.Parse(beatmap.count_slider) >= int.Parse(beatmap.count_normal)) commentsStr += $"{language.command_lastScoreSuka_manySliders()}\n";
                 if (beatmap.title.Split(" ").Length >= 5) commentsStr += $"{language.command_lastScoreSuka_mapTitleTooLong()}\n";
+                
+                
                 if (usersPP < 3000)
                 {
                     if (double.Parse(beatmap.difficultyrating) <= 2) commentsStr += $"{language.command_lastScoreSuka_tooEasyMapForPlayer()}";

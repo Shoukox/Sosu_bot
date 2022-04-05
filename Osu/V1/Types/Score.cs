@@ -1,8 +1,10 @@
-﻿namespace Sosu.osu.V1.Types
+﻿using Newtonsoft.Json;
+
+namespace Sosu.osu.V1.Types
 {
     public class Score
     {
-        public string beatmap_id { get; set; }
+        public string beatmap_id { get; set; } //null in /score
         public string score_id { get; set; }
         public string score { get; set; }
         public string maxcombo { get; set; }
