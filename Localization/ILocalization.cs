@@ -41,6 +41,16 @@ namespace Sosu.Localization
         public string send_mapInfo();
         public string waiting();
 
+        public string map_ranked();
+        public string map_loved();
+        public string map_unranked();
+        public string map_pending();
+        public string map_approved();
+        public string map_wip();
+        public string map_qualified();
+        public string map_graveyard();
+        
+
         public string error_noUser();
         public string error_userNotFound();
         public string error_noRecords();

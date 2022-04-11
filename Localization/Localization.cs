@@ -122,6 +122,46 @@ namespace Sosu.Localization
             public string command_lastScoreSuka_mapFailed() => "Не позорься, пройди ее хотя бы. На этом все."; //проиграл карту
             public string command_lastScoreSuka_tooEasyMapForPlayer() => "Сейчас бы с таким ранком такие легкие мапы играть";
             public string command_lastScoreSuka_tooHardMapForPlayer() => "Тебе еще рано играть такое";
+
+            public string map_ranked()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_loved()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_unranked()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_pending()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_approved()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_wip()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_qualified()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_graveyard()
+            {
+                throw new NotImplementedException();
+            }
         }
         public class en : ILocalization
         {
@@ -214,6 +254,46 @@ namespace Sosu.Localization
             public string command_lastScoreSuka_mapFailed() => "Don't be embarrassed, at least pass it. That's all."; //проиграл карту
             public string command_lastScoreSuka_tooEasyMapForPlayer() => "This map is too easy for you";
             public string command_lastScoreSuka_tooHardMapForPlayer() => "It's too early for you to play this map";
+
+            public string map_ranked()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_loved()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_unranked()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_pending()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_approved()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_wip()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_qualified()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string map_graveyard()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
