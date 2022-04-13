@@ -390,7 +390,7 @@ namespace Sosu.Services
             {
                 different = $"(+{Math.Round(double.Parse(osuUser.pp_raw()) - users1.OrderByDescending(m => m.pp).ElementAt(0).pp, 2)})";
             }
-            string textToSend = Langs.ReplaceEmpty(language.command_user(), new[] { $"{osuUser.profile_url()}", $"{osuUser.username()}", $"{osuUser.pp_rank()}", $"{osuUser.pp_country_rank()}", $"{osuUser.country()}", $"{osuUser.pp_raw():N2}", $"{different:N2}", $"{double.Parse(osuUser.accuracy()):N2}", $"{osuUser.playcount()}", $"{osuUser.playtime_hours()}", $"{osuUser.count_rank_ssh()}", $"{osuUser.count_rank_sh()}", $"{osuUser.count_rank_ss()}", $"{osuUser.count_rank_s()}", $"{osuUser.count_rank_a()}" });
+            string textToSend = Langs.ReplaceEmpty(language.command_user(), new[] { "Standard", $"{osuUser.profile_url()}", $"{osuUser.username()}", $"{osuUser.pp_rank()}", $"{osuUser.pp_country_rank()}", $"{osuUser.country()}", $"{osuUser.pp_raw():N2}", $"{different:N2}", $"{double.Parse(osuUser.accuracy()):N2}", $"{osuUser.playcount()}", $"{osuUser.playtime_hours()}", $"{osuUser.count_rank_ssh()}", $"{osuUser.count_rank_sh()}", $"{osuUser.count_rank_ss()}", $"{osuUser.count_rank_s()}", $"{osuUser.count_rank_a()}" });
             var ik = new InlineKeyboardMarkup(new InlineKeyboardButton[][]
                 {
                     new InlineKeyboardButton[] {new InlineKeyboardButton {Text = "Standard", CallbackData = $"{chat.chat.Id} user 0 {osuUser.username()}"}, new InlineKeyboardButton { Text = "Taiko", CallbackData = $"{chat.chat.Id} user 1 {osuUser.username()}" }},

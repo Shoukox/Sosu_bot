@@ -70,7 +70,7 @@ namespace Sosu.Localization
                     "{} / {} / {} / {}❌ - <b><i>{}</i></b>%\n" +
                     "<b>{}</b> <i>{}/{}</i> <b><u>{}pp</u></b>\n({})\n\n";
             public string command_user() =>
-                   "<b>Standard</b>\n" +
+                   "<b>{}</b>\n" +
                 "<a href=\"{}\"><i>{}</i></a>\n\n" +
                 "<b>rank</b>: <i>#{} (#{} {})</i>\n" +
                 "<b>pp</b>: <i>{} {}</i>\n" +
