@@ -487,9 +487,16 @@ namespace Sosu.Services
             user1 = await Variables.osuApi.GetUserInfoByNameAsync(splittedMessage[1], gamemode);
             user2 = await Variables.osuApi.GetUserInfoByNameAsync(splittedMessage[2], gamemode);
 
-            int max = Other.GetMax(user1.pp_country_rank().Length + "# UZ".Length, user1.pp_rank().Length + "#".Length, user1.pp_raw().ToString().Length + "pp".Length, user1.accuracy().Length + "%".Length, $"{user1.playtime_hours()}".Length + "h".Length, user1.username().Length);
+            if(user1 == null || user2 == null)
+            {
+                await bot.EditMessageTextAsync(msg.Chat.Id, message.MessageId, language.error_userNotFound(), ParseMode.Html);
+                return;
+            }
+
             string acc1 = $"{double.Parse(user1.accuracy()):N2}";
             string acc2 = $"{double.Parse(user2.accuracy()):N2}";
+            int max = Other.GetMax(user1.pp_country_rank().Length + "# UZ".Length, user1.pp_rank().Length + "#".Length, user1.pp_raw().ToString().Length + "pp".Length, acc1.Length + "%".Length, $"{user1.playtime_hours()}h".Length, user1.username().Length);
+
             string textToSend = Langs.ReplaceEmpty(language.command_compare(), new[] { $"{Variables.osuApi.GetGameMode(gamemode)}", $"{user1.username().PadRight(max)}", $"{user2.username()}", $"{("#" + user1.pp_rank()).PadRight(max)}", $"{user2.pp_rank()}", $"{("#" + user1.pp_country_rank() + " " + user1.country()).PadRight(max)}", $"{(user2.pp_country_rank() + " " + user2.country())}", $"{(user1.pp_raw() + "pp").PadRight(max)}", $"{user2.pp_raw()}", $"{(acc1 + "%").PadRight(max)}", $"{acc2}%", $"{(user1.playtime_hours().ToString() + "h").PadRight(max)}", $"{user2.playtime_hours()}" });
             await bot.EditMessageTextAsync(msg.Chat.Id, message.MessageId, textToSend, ParseMode.Html, disableWebPagePreview: true);
         }

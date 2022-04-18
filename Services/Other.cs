@@ -53,10 +53,7 @@ namespace Sosu.Services
                 return text.Substring(0, 1).ToUpper() + text.Substring(1);
             }
         }
-        public static int GetMax(params int[] numbers)
-        {
-            return numbers.Max();
-        }
+        public static int GetMax(params int[] numbers) => numbers.Max();
         public static string GetUrlFromText(string text)
         {
             string pattern = "https://"; string url = "";
