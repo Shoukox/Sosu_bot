@@ -53,7 +53,8 @@ namespace Sosu.Localization
                 $"/compare [nickname1] [nickname2] [mode] - сравнить игроков. [mode]: 0-std, 1-taiko, 2-catch, 3-mania\n" +
                 $"/chat_stats - топ10 игроков в чате.\n\n" +
                 $"[mode]: 0-std, 1-taiko, 2-catch, 3-mania\n" +
-                $"Если отправить ссылку карты, бот отправит краткую информацию о ней";
+                $"Если отправить ссылку карты, бот отправит краткую информацию о ней\n\n" +
+                $"По вопросам и предложениям писать создателю @Shoukkoo";
             public string command_last() =>
                 "{}. <b>({})</b> <a href=\"https://osu.ppy.sh/beatmaps/{}\">{} [{}]</a> <b>({})</b>\n" +
                     "{} / {} / {} / {}❌ - <b><i>{}</i></b>%\n" +
