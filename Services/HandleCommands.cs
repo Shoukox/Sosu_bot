@@ -703,7 +703,7 @@ namespace Sosu.Services
                 danbooruPost = Variables.danbooruApi.RandomPostByTags(tags);
                 if (danbooruPost == null)
                 {
-                    string sendText = "Такого тега там нет.";
+                    string sendText = "Es gibt kein solches Tag";
                     await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
                     return;
                 }
