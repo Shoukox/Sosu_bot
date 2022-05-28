@@ -36,6 +36,7 @@ namespace Sosu.Localization
             public string settings_language_changedSuccessfully() => "Язык успешно изменен на русский.";
             public string settings_language_ru() => "Русский";
             public string settings_language_en() => "English";
+            public string settings_language_de() => "Deutsch";
             public string command_start() =>
                 $"Бот-помощник для игрока osu!\n" +
                 $"/help - для получения списка всех комманд.\n\n" +
@@ -51,7 +52,8 @@ namespace Sosu.Localization
                 $"/score [beatmap_link] - ваши рекорды на этой карте.\n" +
                 $"/userbest [nickname] [mode] - лучшие игры игрока.\n" +
                 $"/compare [nickname1] [nickname2] [mode] - сравнить игроков. [mode]: 0-std, 1-taiko, 2-catch, 3-mania\n" +
-                $"/chat_stats - топ10 игроков в чате.\n\n" +
+                $"/chat_stats - топ10 игроков в чате.\n" +
+                $"/settings - изменить язык бота\n\n" +
                 $"[mode]: 0-std, 1-taiko, 2-catch, 3-mania\n" +
                 $"Если отправить ссылку карты, бот отправит краткую информацию о ней\n\n" +
                 $"По вопросам и предложениям писать создателю @Shoukkoo";
@@ -170,6 +172,7 @@ namespace Sosu.Localization
             public string settings_language_changedSuccessfully() => "The language has been successfully changed to English.";
             public string settings_language_ru() => "Русский";
             public string settings_language_en() => "English";
+            public string settings_language_de() => "Deutsch";
             public string command_start() =>
                 $"Bot-assistant for osu! player\n" +
                 $"/help - to get a list of all commands.\n\n" +
@@ -185,9 +188,11 @@ namespace Sosu.Localization
                 $"/score [beatmap_link] - your records on this map.\n" +
                 $"/userbest [nickname] [mode] - best player games.\n" +
                 $"/compare [nickname1] [nickname2] [mode] - compare players.\n" +
-                $"/chat_stats - top 10 players in the chat.\n\n" +
+                $"/chat_stats - top 10 players in the chat.\n" +
+                $"/settings - change bot language\n\n" +
                 $"[mode]: 0-std, 1-taiko, 2-catch, 3-mania\n" +
-                $"If you send a map link, the bot will send a brief information about it";
+                $"If you send a map link, the bot will send a brief information about it\n\n" +
+                $"For questions and suggestions write to the creator @Shoukkoo";
             public string command_last() =>
                "{}. <b>({})</b> <a href=\"https://osu.ppy.sh/beatmaps/{}\">{} [{}]</a> <b>({})</b>\n" +
                    "{} / {} / {} / {}❌ - <b><i>{}</i></b>%\n" +

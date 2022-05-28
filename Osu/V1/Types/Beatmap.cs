@@ -139,10 +139,10 @@ namespace Sosu.osu.V1.Types
 
         [JsonProperty("bpm")]
         private string _bpm { get; set; }
-        public int bpm()
+        public double bpm()
         {
             string m = $"{mods()}";
-            double bpm = int.Parse(_bpm);
+            double bpm = double.Parse(_bpm);
             if (m.Contains(Enums.Mods.DoubleTime.ToString()) || m.Contains(Enums.Mods.Nightcore.ToString()))
             {
                 bpm = bpm * 1.5;
@@ -151,7 +151,7 @@ namespace Sosu.osu.V1.Types
             {
                 bpm = bpm * 0.75;
             }
-            return System.Convert.ToInt32(bpm);
+            return System.Convert.ToDouble(bpm);
         }
 
         public string source { get; set; }
