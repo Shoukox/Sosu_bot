@@ -531,51 +531,6 @@ namespace Sosu.Services
             sendText += language.command_chatstats_end();
             await bot.EditMessageTextAsync(msg.Chat.Id, message.MessageId, sendText, ParseMode.Html, disableWebPagePreview: true);
         }
-        public static async Task AdminSendm(ITelegramBotClient bot, Message msg)
-        {
-            if (Variables.WHITELIST.Contains(msg.From.Id))
-            {
-                await bot.SendTextMessageAsync(msg.Chat.Id, string.Join(" ", msg.Text.Split(" ").Skip(1)), ParseMode.Html, replyToMessageId: msg.ReplyToMessage.MessageId);
-                await bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId);
-            }
-        }
-        public static async Task AdminDelete(ITelegramBotClient bot, Message msg)
-        {
-            if (Variables.WHITELIST.Contains(msg.From.Id))
-            {
-                if (msg.ReplyToMessage != null)
-                {
-                    await bot.DeleteMessageAsync(msg.ReplyToMessage.Chat.Id, msg.ReplyToMessage.MessageId);
-                }
-            }
-        }
-        public static async Task AdminGet(ITelegramBotClient bot, Message msg)
-        {
-            if (Variables.WHITELIST.Contains(msg.From.Id))
-            {
-                if (msg.ReplyToMessage != null)
-                {
-                    string json = Newtonsoft.Json.JsonConvert.SerializeObject(msg.ReplyToMessage, Newtonsoft.Json.Formatting.Indented);
-                    await bot.SendTextMessageAsync(msg.Chat.Id, json, replyToMessageId: msg.MessageId);
-                }
-            }
-        }
-        public static async Task Settings(ITelegramBotClient bot, Message msg)
-        {
-            var user = Variables.osuUsers.FirstOrDefault(m => m.telegramId == msg.From.Id);
-            var chat = Variables.chats.FirstOrDefault(m => m.chat.Id == msg.Chat.Id);
-
-            ILocalization language = Langs.GetLang(chat.language);
-
-            InlineKeyboardMarkup ik = new InlineKeyboardMarkup(
-                new InlineKeyboardButton[][]
-                {
-                    new InlineKeyboardButton[] { new InlineKeyboardButton {Text=$"{language.settings_language_ru()}", CallbackData = $"{chat.chat.Id} language ru"} },
-                    new InlineKeyboardButton[] { new InlineKeyboardButton {Text=$"{language.settings_language_en()}", CallbackData = $"{chat.chat.Id} language en"} }
-                });
-
-            await bot.SendTextMessageAsync(msg.Chat.Id, language.settings(), ParseMode.Html, replyMarkup: ik);
-        }
         public static async Task OsuLastScoreSuka(ITelegramBotClient bot, Message msg)
         {
             Score[] scores = default;
@@ -661,14 +616,14 @@ namespace Sosu.Services
                 if (double.Parse(item.maxcombo) / double.Parse(beatmap.max_combo) >= 0.9 && int.Parse(item.countmiss) >= 1) commentsStr += $"{language.command_lastScoreSuka_shitMisses()}\n";
                 if (int.Parse(beatmap.count_slider) >= int.Parse(beatmap.count_normal)) commentsStr += $"{language.command_lastScoreSuka_manySliders()}\n";
                 if (beatmap.title.Split(" ").Length >= 5) commentsStr += $"{language.command_lastScoreSuka_mapTitleTooLong()}\n";
-                
-                
+
+
                 if (usersPP < 3000)
                 {
                     if (double.Parse(beatmap.difficultyrating) <= 2) commentsStr += $"{language.command_lastScoreSuka_tooEasyMapForPlayer()}";
-                    else if(double.Parse(beatmap.difficultyrating) >= 6) commentsStr += $"{language.command_lastScoreSuka_tooHardMapForPlayer()}";
+                    else if (double.Parse(beatmap.difficultyrating) >= 6) commentsStr += $"{language.command_lastScoreSuka_tooHardMapForPlayer()}";
                 }
-                else if(usersPP >= 3000 && usersPP <= 5000)
+                else if (usersPP >= 3000 && usersPP <= 5000)
                 {
                     if (double.Parse(beatmap.difficultyrating) <= 3) commentsStr += $"{language.command_lastScoreSuka_tooEasyMapForPlayer()}";
                     else if (double.Parse(beatmap.difficultyrating) >= 7) commentsStr += $"{language.command_lastScoreSuka_tooHardMapForPlayer()}";
@@ -688,6 +643,78 @@ namespace Sosu.Services
             }
             await Variables.db.InsertOrUpdateOsuChatsTable(chat.lastBeatmap_id, chat.chat.Id, 0, chat.members);
             await bot.EditMessageTextAsync(msg.Chat.Id, message.MessageId, textToSend, ParseMode.Html, disableWebPagePreview: true);
+        }
+
+        public static async Task AdminSendm(ITelegramBotClient bot, Message msg)
+        {
+            if (Variables.WHITELIST.Contains(msg.From.Id))
+            {
+                await bot.SendTextMessageAsync(msg.Chat.Id, string.Join(" ", msg.Text.Split(" ").Skip(1)), ParseMode.Html, replyToMessageId: msg.ReplyToMessage.MessageId);
+                await bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId);
+            }
+        }
+        public static async Task AdminDelete(ITelegramBotClient bot, Message msg)
+        {
+            if (Variables.WHITELIST.Contains(msg.From.Id))
+            {
+                if (msg.ReplyToMessage != null)
+                {
+                    await bot.DeleteMessageAsync(msg.ReplyToMessage.Chat.Id, msg.ReplyToMessage.MessageId);
+                }
+            }
+        }
+        public static async Task AdminGet(ITelegramBotClient bot, Message msg)
+        {
+            if (Variables.WHITELIST.Contains(msg.From.Id))
+            {
+                if (msg.ReplyToMessage != null)
+                {
+                    string json = Newtonsoft.Json.JsonConvert.SerializeObject(msg.ReplyToMessage, Newtonsoft.Json.Formatting.Indented);
+                    await bot.SendTextMessageAsync(msg.Chat.Id, json, replyToMessageId: msg.MessageId);
+                }
+            }
+        }
+
+        public static async Task Settings(ITelegramBotClient bot, Message msg)
+        {
+            var user = Variables.osuUsers.FirstOrDefault(m => m.telegramId == msg.From.Id);
+            var chat = Variables.chats.FirstOrDefault(m => m.chat.Id == msg.Chat.Id);
+
+            ILocalization language = Langs.GetLang(chat.language);
+
+            InlineKeyboardMarkup ik = new InlineKeyboardMarkup(
+                new InlineKeyboardButton[][]
+                {
+                    new InlineKeyboardButton[] { new InlineKeyboardButton {Text=$"{language.settings_language_ru()}", CallbackData = $"{chat.chat.Id} language ru"} },
+                    new InlineKeyboardButton[] { new InlineKeyboardButton {Text=$"{language.settings_language_en()}", CallbackData = $"{chat.chat.Id} language en"} }
+                });
+
+            await bot.SendTextMessageAsync(msg.Chat.Id, language.settings(), ParseMode.Html, replyMarkup: ik);
+        }
+
+        public static async Task DanbooruPic(ITelegramBotClient bot, Message msg)
+        {
+            string[] splittedMessage = msg.Text.Split(" ");
+            string tags = string.Join(" ", splittedMessage.Skip(1));
+
+            danbooruApi.danbooru.Classes.Post danbooruPost;
+            while (true)
+            {
+                danbooruPost = Variables.danbooruApi.RandomPostByTags(tags);
+                if (danbooruPost.file_size.Value < 10480000) break;
+            }
+
+            if(danbooruPost == null)
+            {
+                string sendText = "Такого тега там нет.";
+                await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId:msg.MessageId);
+                return;
+            }
+            Console.WriteLine(danbooruPost.file_size);
+            InputOnlineFile inputOnlineFile = new InputOnlineFile(Variables.danbooruApi.ImageUrlToStream(danbooruPost.file_url));
+
+            string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}";
+            await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId);
         }
 
         public static async Task Test(ITelegramBotClient bot, Message msg)

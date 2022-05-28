@@ -12,6 +12,7 @@ namespace Sosu
     public class Variables
     {
         public static osuApi osuApi;
+        public static danbooruApi.danbooru.danbooru danbooruApi;
         public static Telegram.Bot.Types.User bot;
         public static Database db;
         public static List<long> WHITELIST = new List<long>() { 728384906 };
