@@ -487,7 +487,7 @@ namespace Sosu.Services
             user1 = await Variables.osuApi.GetUserInfoByNameAsync(splittedMessage[1], gamemode);
             user2 = await Variables.osuApi.GetUserInfoByNameAsync(splittedMessage[2], gamemode);
 
-            if(user1 == null || user2 == null)
+            if (user1 == null || user2 == null)
             {
                 await bot.EditMessageTextAsync(msg.Chat.Id, message.MessageId, language.error_userNotFound(), ParseMode.Html);
                 return;
@@ -701,15 +701,16 @@ namespace Sosu.Services
             while (true)
             {
                 danbooruPost = Variables.danbooruApi.RandomPostByTags(tags);
+                if (danbooruPost == null)
+                {
+                    string sendText = "Такого тега там нет.";
+                    await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
+                    return;
+                }
                 if (danbooruPost.file_size.Value < 10480000) break;
             }
 
-            if(danbooruPost == null)
-            {
-                string sendText = "Такого тега там нет.";
-                await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId:msg.MessageId);
-                return;
-            }
+
             Console.WriteLine(danbooruPost.file_size);
             InputOnlineFile inputOnlineFile = new InputOnlineFile(Variables.danbooruApi.ImageUrlToStream(danbooruPost.file_url));
 
