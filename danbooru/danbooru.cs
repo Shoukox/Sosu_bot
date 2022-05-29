@@ -12,7 +12,7 @@ namespace danbooruApi.danbooru
     {
         private readonly string host = "https://danbooru.donmai.us/";
         private readonly string file_type = "filetype:png,jpg";
-        private readonly string file_size = "filesize:200kb..9.5M";
+        private readonly string file_size = "filesize:200kb..9M";
 
         public Tag FindBestTag(string tags)
         {

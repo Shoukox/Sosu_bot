@@ -700,8 +700,8 @@ namespace Sosu.Services
             danbooruApi.danbooru.Classes.Post danbooruPost = Variables.danbooruApi.RandomPostByTags(tags, new string[] { "e" });
             if (danbooruPost == null)
             {
-                string sendText = "Es gibt kein solches Tag\\Foto zu dieser Anfrage";
-                await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
+                string sendText = "There is no such tag\\photo for this request.\nTry again.";
+                await bot.SendTextMessageAsync(msg.Chat.Id,sendText, replyToMessageId: msg.MessageId);
                 return;
             }
 
@@ -715,10 +715,11 @@ namespace Sosu.Services
             string[] splittedMessage = msg.Text.Split(" ");
             string tags = string.Join(" ", splittedMessage.Skip(1));
 
+            
             danbooruApi.danbooru.Classes.Post danbooruPost = Variables.danbooruApi.RandomPostByTags(tags, new string[] { "q", "g", "s" });
             if (danbooruPost == null)
             {
-                string sendText = "Es gibt kein solches Tag\\Foto zu dieser Anfrage";
+                string sendText = "There is no such tag\\photo for this request.\nTry again.";
                 await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
                 return;
             }
