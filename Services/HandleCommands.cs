@@ -692,31 +692,43 @@ namespace Sosu.Services
             await bot.SendTextMessageAsync(msg.Chat.Id, language.settings(), ParseMode.Html, replyMarkup: ik);
         }
 
-        public static async Task DanbooruPic(ITelegramBotClient bot, Message msg)
+        public static async Task DanbooruExplicit(ITelegramBotClient bot, Message msg)
         {
             string[] splittedMessage = msg.Text.Split(" ");
             string tags = string.Join(" ", splittedMessage.Skip(1));
 
-            danbooruApi.danbooru.Classes.Post danbooruPost;
-            while (true)
+            danbooruApi.danbooru.Classes.Post danbooruPost = Variables.danbooruApi.RandomPostByTags(tags, new string[] { "e" });
+            if (danbooruPost == null)
             {
-                danbooruPost = Variables.danbooruApi.RandomPostByTags(tags);
-                if (danbooruPost == null)
-                {
-                    string sendText = "Es gibt kein solches Tag";
-                    await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
-                    return;
-                }
-                if (danbooruPost.file_size.Value < 10480000) break;
+                string sendText = "Es gibt kein solches Tag\\Foto zu dieser Anfrage";
+                await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
+                return;
             }
 
-
-            Console.WriteLine(danbooruPost.file_size);
             InputOnlineFile inputOnlineFile = new InputOnlineFile(Variables.danbooruApi.ImageUrlToStream(danbooruPost.file_url));
 
             string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}";
             await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId);
         }
+        public static async Task DanbooruNonExplicit(ITelegramBotClient bot, Message msg)
+        {
+            string[] splittedMessage = msg.Text.Split(" ");
+            string tags = string.Join(" ", splittedMessage.Skip(1));
+
+            danbooruApi.danbooru.Classes.Post danbooruPost = Variables.danbooruApi.RandomPostByTags(tags, new string[] { "q", "g", "s" });
+            if (danbooruPost == null)
+            {
+                string sendText = "Es gibt kein solches Tag";
+                await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
+                return;
+            }
+
+            InputOnlineFile inputOnlineFile = new InputOnlineFile(Variables.danbooruApi.ImageUrlToStream(danbooruPost.file_url));
+
+            string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}";
+            await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId);
+        }
+
 
         public static async Task Test(ITelegramBotClient bot, Message msg)
         {

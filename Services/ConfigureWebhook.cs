@@ -45,7 +45,8 @@ namespace Sosu.Services
                 { new string[] {"/del"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.AdminDelete)},
                 { new string[] {"/get"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.AdminGet)},
                 { new string[] {"/settings"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.Settings)},
-                { new string[] {"/d"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.DanbooruPic)},
+                { new string[] {"/de"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.DanbooruExplicit)},
+                { new string[] {"/dn"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.DanbooruNonExplicit)},
                 { new string[] {"/test"},   new Func<ITelegramBotClient, Message, Task>(HandleCommands.Test)},
             };
             Variables.callbacks = new Dictionary<string, Func<ITelegramBotClient, CallbackQuery, Task>>()
