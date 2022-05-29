@@ -707,8 +707,8 @@ namespace Sosu.Services
 
             InputOnlineFile inputOnlineFile = new InputOnlineFile(Variables.danbooruApi.ImageUrlToStream(danbooruPost.file_url));
 
-            string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}";
-            await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId);
+            string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}\nTags: <b>{danbooruPost.bestTag}</b> ...";
+            await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId, parseMode:ParseMode.Html);
         }
         public static async Task DanbooruNonExplicit(ITelegramBotClient bot, Message msg)
         {
@@ -718,15 +718,15 @@ namespace Sosu.Services
             danbooruApi.danbooru.Classes.Post danbooruPost = Variables.danbooruApi.RandomPostByTags(tags, new string[] { "q", "g", "s" });
             if (danbooruPost == null)
             {
-                string sendText = "Es gibt kein solches Tag";
+                string sendText = "Es gibt kein solches Tag\\Foto zu dieser Anfrage";
                 await bot.SendTextMessageAsync(msg.Chat.Id, sendText, replyToMessageId: msg.MessageId);
                 return;
             }
 
             InputOnlineFile inputOnlineFile = new InputOnlineFile(Variables.danbooruApi.ImageUrlToStream(danbooruPost.file_url));
 
-            string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}";
-            await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId);
+            string text = $"Id: {danbooruPost.id}\nRating: {danbooruPost.rating}\nTags: <b>{danbooruPost.bestTag}</b> ...";
+            await bot.SendPhotoAsync(msg.Chat.Id, inputOnlineFile, caption: text, replyToMessageId: msg.MessageId, parseMode: ParseMode.Html);
         }
 
 

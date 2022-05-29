@@ -52,5 +52,8 @@ namespace danbooruApi.danbooru.Classes
         public string? file_url { get; set; }
         public string? large_file_url { get; set; }
         public string? preview_file_url { get; set; }
+
+        public string bestTag { get; set; }
+
     }
 }

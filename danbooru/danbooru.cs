@@ -21,9 +21,9 @@ namespace danbooruApi.danbooru
             {
                 using (WebClient wc = new WebClient())
                 {
-                    string url = host + $"tags.json?search[name_matches]={tags}*";
+                    string url = host + $"tags.json?search[name_matches]={tags}*&search[order]=count";
                     string json = wc.DownloadString(url);
-                    Tag tag = Newtonsoft.Json.JsonConvert.DeserializeObject<Tag[]>(json).OrderByDescending(m => m.post_count).ToArray()[0];
+                    Tag tag = Newtonsoft.Json.JsonConvert.DeserializeObject<Tag[]>(json).ToArray()[0];
                     return tag;
                 }
             }
@@ -43,9 +43,10 @@ namespace danbooruApi.danbooru
             {
                 using (WebClient wc = new WebClient())
                 {
-                    string url = host + $"posts/random.json?tags={tags} {file_type} {file_size} rating:{string.Join(",", ratings)}";
+                    string url = host + $"posts/random.json?tags={tags} {file_size} rating:{string.Join(",", ratings)}";
                     string json = wc.DownloadString(url);
                     Post post = Newtonsoft.Json.JsonConvert.DeserializeObject<Post>(json);
+                    post.bestTag = tags;
                     return post;
                 }
             }
@@ -63,7 +64,7 @@ namespace danbooruApi.danbooru
             {
                 using (WebClient wc = new WebClient())
                 {
-                    string url = host + $"posts/{id}.json?tags={file_type} {file_size} rating:{string.Join(",", ratings)}";
+                    string url = host + $"posts/{id}.json?tags={file_size} rating:{string.Join(",", ratings)}";
                     string json = wc.DownloadString(url);
                     Post post = Newtonsoft.Json.JsonConvert.DeserializeObject<Post>(json);
                     return post;

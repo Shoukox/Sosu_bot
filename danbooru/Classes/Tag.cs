@@ -15,6 +15,7 @@ namespace danbooruApi.danbooru.Classes
         public DateTime updated_at { get; set; }
         public bool is_locked { get; set; }
         public bool is_deprecated { get; set; }
+
     }
 
 
