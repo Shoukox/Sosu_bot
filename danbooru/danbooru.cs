@@ -36,8 +36,15 @@ namespace danbooruApi.danbooru
         public Post RandomPostByTags(string tags, string[] ratings = null)
         {
             if (ratings == null) ratings = new string[] { "e", "q", "g", "s" };
+            
             tags = tags.Replace(" ", "_");
-            if (tags != "") tags = FindBestTag(tags).name;
+            if (tags != "")
+            {
+                var bestTag = FindBestTag(tags);
+                if (bestTag == null) return null;
+
+                tags = bestTag.name;
+            }
 
             try
             {
@@ -46,6 +53,7 @@ namespace danbooruApi.danbooru
                     string url = host + $"posts/random.json?tags={tags} {file_size} rating:{string.Join(",", ratings)}";
                     string json = wc.DownloadString(url);
                     Post post = Newtonsoft.Json.JsonConvert.DeserializeObject<Post>(json);
+                    if (post.file_url == null) return null;
                     post.bestTag = tags;
                     return post;
                 }
