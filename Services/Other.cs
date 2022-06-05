@@ -18,7 +18,7 @@ namespace Sosu.Services
             var beatmapp = Beatmap.Read(reader);
             var pp = new PPv2(new PPv2Parameters(beatmapp, accuracy: accuracy / 100, misses, combo, mods: mods));
             var ppifFc = new PPv2(new PPv2Parameters(beatmapp, accuracy: accuracy / 100, 0, -1, mods: mods));
-            return new double[] { pp.Total, ppifFc.Total };
+            return new double[] { Math.Round(pp.Total), Math.Round(ppifFc.Total) };
         }
         //public static double ppCalc1(long beatmap_id, double accuracy, Mods mods, int count100, int count50, int misses, int combo)
         //{

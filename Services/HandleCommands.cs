@@ -83,7 +83,7 @@ namespace Sosu.Services
 
 
                 string duration = $"{beatmap.hit_length() / 60}:{(beatmap.hit_length() % 60):00}";
-                string textToSend = Langs.ReplaceEmpty(language.send_mapInfo(), new[] { $"{beatmap.version}", $"{double.Parse(beatmap.difficultyrating):N2}", $"{duration}", $"{beatmap.creator}", $"{beatmap.GetApproved()}", $"{beatmap.diff_size()}", $"{beatmap.diff_approach()}", $"{beatmap.diff_overall()}", $"{beatmap.diff_drain()}", $"{beatmap.bpm()}", $"{acc100[0]:N2}", $"{acc98[0]:N2}", $"{acc96[0]:N2}", $"{Mods}" });
+                string textToSend = Langs.ReplaceEmpty(language.send_mapInfo(), new[] { $"{beatmap.version}", $"{double.Parse(beatmap.difficultyrating):N2}", $"{duration}", $"{beatmap.creator}", $"{beatmap.GetApproved()}", $"{beatmap.diff_size()}", $"{beatmap.diff_approach()}", $"{beatmap.diff_overall()}", $"{beatmap.diff_drain()}", $"{beatmap.bpm()}", $"{acc100[0]}", $"{acc98[0]}", $"{acc96[0]}", $"{Mods}" });
                 InputOnlineFile photo = new InputOnlineFile(new Uri($"https://assets.ppy.sh/beatmaps/{beatmap.beatmapset_id}/covers/card@2x.jpg"));
                 await Variables.db.InsertOrUpdateOsuChatsTable(beatmap_id, message.Chat.Id, 0, chat.members);
                 chat.lastBeatmap_id = beatmap_id;
@@ -185,7 +185,7 @@ namespace Sosu.Services
                 //{Other.ppCalc1(long.Parse(beatmap.beatmap_id), item.accuracy(), (OppaiSharp.Mods)mods, int.Parse(item.count100), int.Parse(item.count50), int.Parse(item.countmiss), int.Parse(item.maxcombo)),
                 //Other.ppCalc1(long.Parse(beatmap.beatmap_id), item.accuracy(), (OppaiSharp.Mods)mods, int.Parse(item.count100), int.Parse(item.count50), 0, int.Parse(beatmap.max_combo))};
                 double[] curpp = Other.ppCalc(long.Parse(beatmap.beatmap_id), item.accuracy(), (OppaiSharp.Mods)mods, int.Parse(item.countmiss), int.Parse(item.maxcombo));
-                textToSend += Langs.ReplaceEmpty(language.command_last(), new[] { $"{i + 1}", $"{item.rank}", $"{item.beatmap_id}", $"{beatmap.title}", $"{beatmap.version}", $"{beatmap.GetApproved()}", $"{item.count300}", $"{item.count100}", $"{item.count50}", $"{item.countmiss}", $"{item.accuracy():N2}", $"{mods}", $"{item.maxcombo}", $"{beatmap.max_combo}", $"{curpp[0]:N2}", $"{curpp[1]:N2}", $"{DateTimeOffset.Parse(item.date):dd.MM.yyyy HH:mm zzz}", $"{item.completion(beatmap.countobjects()):N1}" });
+                textToSend += Langs.ReplaceEmpty(language.command_last(), new[] { $"{i + 1}", $"{item.rank}", $"{item.beatmap_id}", $"{beatmap.title}", $"{beatmap.version}", $"{beatmap.GetApproved()}", $"{item.count300}", $"{item.count100}", $"{item.count50}", $"{item.countmiss}", $"{item.accuracy():N2}", $"{mods}", $"{item.maxcombo}", $"{beatmap.max_combo}", $"{curpp[0]}", $"{curpp[1]}", $"{DateTimeOffset.Parse(item.date).AddHours(5):dd.MM.yyyy HH:mm} UTC+05:00", $"{item.completion(beatmap.countobjects()):N1}" });
                 i++;
             }
             await Variables.db.InsertOrUpdateOsuChatsTable(chat.lastBeatmap_id, chat.chat.Id, 0, chat.members);

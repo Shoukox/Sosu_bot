@@ -21,7 +21,5 @@ namespace Sosu
         public static Dictionary<string, Func<ITelegramBotClient, CallbackQuery, Task>> callbacks;
         public static List<Types.osuUser> osuUsers;
         public static List<Types.Chat> chats;
-
-        public static string ngrokServer = "https://1eec-62-209-129-154.ngrok.io";
     }
 }
