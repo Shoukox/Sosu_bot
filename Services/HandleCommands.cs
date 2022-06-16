@@ -88,7 +88,7 @@ namespace Sosu.Services
                 await Variables.db.InsertOrUpdateOsuChatsTable(beatmap_id, message.Chat.Id, 0, chat.members);
                 chat.lastBeatmap_id = beatmap_id;
 
-                var ik = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Song prewiew", CallbackData = $"{chat.chat.Id} songprewiew {beatmap.beatmapset_id}" });
+                var ik = new InlineKeyboardMarkup(new InlineKeyboardButton("Song prewiew") { CallbackData = $"{chat.chat.Id} songprewiew {beatmap.beatmapset_id}" });
                 try
                 {
                     await bot.SendPhotoAsync(message.Chat.Id, photo, caption: textToSend, ParseMode.Html, replyMarkup: ik);
@@ -393,8 +393,8 @@ namespace Sosu.Services
             string textToSend = Langs.ReplaceEmpty(language.command_user(), new[] { "Standard", $"{osuUser.profile_url()}", $"{osuUser.username()}", $"{osuUser.pp_rank()}", $"{osuUser.pp_country_rank()}", $"{osuUser.country()}", $"{osuUser.pp_raw():N2}", $"{different:N2}", $"{double.Parse(osuUser.accuracy()):N2}", $"{osuUser.playcount()}", $"{osuUser.playtime_hours()}", $"{osuUser.count_rank_ssh()}", $"{osuUser.count_rank_sh()}", $"{osuUser.count_rank_ss()}", $"{osuUser.count_rank_s()}", $"{osuUser.count_rank_a()}" });
             var ik = new InlineKeyboardMarkup(new InlineKeyboardButton[][]
                 {
-                    new InlineKeyboardButton[] {new InlineKeyboardButton {Text = "Standard", CallbackData = $"{chat.chat.Id} user 0 {osuUser.username()}"}, new InlineKeyboardButton { Text = "Taiko", CallbackData = $"{chat.chat.Id} user 1 {osuUser.username()}" }},
-                    new InlineKeyboardButton[] {new InlineKeyboardButton {Text = "Catch", CallbackData = $"{chat.chat.Id} user 2 {osuUser.username()}" }, new InlineKeyboardButton { Text = "Mania", CallbackData = $"{chat.chat.Id} user 3 {osuUser.username()}" }}
+                    new InlineKeyboardButton[] {new InlineKeyboardButton("Standard") {CallbackData = $"{msg.Chat.Id} user 0 {osuUser.username()}"}, new InlineKeyboardButton("Taiko") {CallbackData = $"{msg.Chat.Id} user 1 {osuUser.username()}" }},
+                    new InlineKeyboardButton[] {new InlineKeyboardButton("Catch") {CallbackData = $"{msg.Chat.Id} user 2 {osuUser.username()}" }, new InlineKeyboardButton("Mania") { CallbackData = $"{msg.Chat.Id} user 3 {osuUser.username()}" }}
 
                 });
 
@@ -462,7 +462,7 @@ namespace Sosu.Services
                 i += 1;
             }
             var ik = new InlineKeyboardMarkup(
-                new InlineKeyboardButton[] { new InlineKeyboardButton { Text = "Previous", CallbackData = $"{chat.chat.Id} userbest previous 0 {gameMode} {osuUser.username()}" }, new InlineKeyboardButton { Text = "Next", CallbackData = $"{chat.chat.Id} userbest next 0 {gameMode} {osuUser.username()}" } }
+                new InlineKeyboardButton[] { new InlineKeyboardButton("Previous") { CallbackData = $"{chat.chat.Id} userbest previous 0 {gameMode} {osuUser.username()}" }, new InlineKeyboardButton("Next") { CallbackData = $"{chat.chat.Id} userbest next 0 {gameMode} {osuUser.username()}" } }
                 );
             await bot.EditMessageTextAsync(msg.Chat.Id, message.MessageId, textToSend, ParseMode.Html, replyMarkup: ik, disableWebPagePreview: true);
         }
@@ -685,8 +685,8 @@ namespace Sosu.Services
             InlineKeyboardMarkup ik = new InlineKeyboardMarkup(
                 new InlineKeyboardButton[][]
                 {
-                    new InlineKeyboardButton[] { new InlineKeyboardButton {Text=$"{language.settings_language_ru()}", CallbackData = $"{chat.chat.Id} language ru"} },
-                    new InlineKeyboardButton[] { new InlineKeyboardButton {Text=$"{language.settings_language_en()}", CallbackData = $"{chat.chat.Id} language en"} }
+                    new InlineKeyboardButton[] { new InlineKeyboardButton(language.settings_language_ru()) { CallbackData = $"{chat.chat.Id} language ru"} },
+                    new InlineKeyboardButton[] { new InlineKeyboardButton(language.settings_language_en()) { CallbackData = $"{chat.chat.Id} language en"} }
                 });
 
             await bot.SendTextMessageAsync(msg.Chat.Id, language.settings(), ParseMode.Html, replyMarkup: ik);

@@ -45,8 +45,8 @@ namespace Sosu.Services
             string textToSend = Langs.ReplaceEmpty(language.command_user(), new[] { $"{modeString}", $"{osuUser.profile_url()}", $"{osuUser.username()}", $"{osuUser.pp_rank()}", $"{osuUser.pp_country_rank()}", $"{osuUser.country()}", $"{osuUser.pp_raw():N2}", $"{different:N2}", $"{double.Parse(osuUser.accuracy()):N2}", $"{osuUser.playcount()}", $"{osuUser.playtime_hours()}", $"{osuUser.count_rank_ssh()}", $"{osuUser.count_rank_sh()}", $"{osuUser.count_rank_ss()}", $"{osuUser.count_rank_s()}", $"{osuUser.count_rank_a()}" });
             var ik = new InlineKeyboardMarkup(new InlineKeyboardButton[][]
                 {
-                    new InlineKeyboardButton[] {new InlineKeyboardButton {Text = "Standard", CallbackData = $"{callback.Message.Chat.Id} user 0 {name}"}, new InlineKeyboardButton { Text = "Taiko", CallbackData = $"{callback.Message.Chat.Id} user 1 {name}" }},
-                    new InlineKeyboardButton[] {new InlineKeyboardButton {Text = "Catch", CallbackData = $"{callback.Message.Chat.Id} user 2 {name}" }, new InlineKeyboardButton { Text = "Mania", CallbackData = $"{callback.Message.Chat.Id} user 3 {name}" }}
+                    new InlineKeyboardButton[] {new InlineKeyboardButton("Standard") {CallbackData = $"{callback.Message.Chat.Id} user 0 {name}"}, new InlineKeyboardButton("Taiko") {CallbackData = $"{callback.Message.Chat.Id} user 1 {name}" }},
+                    new InlineKeyboardButton[] {new InlineKeyboardButton("Catch") {CallbackData = $"{callback.Message.Chat.Id} user 2 {name}" }, new InlineKeyboardButton("Mania") { CallbackData = $"{callback.Message.Chat.Id} user 3 {name}" }}
 
                 });
             await bot.EditMessageTextAsync(callback.Message.Chat.Id, callback.Message.MessageId, textToSend, ParseMode.Html, replyMarkup: ik, disableWebPagePreview: true);
@@ -101,7 +101,7 @@ namespace Sosu.Services
                 index += 1;
             }
             var ik = new InlineKeyboardMarkup(
-               new InlineKeyboardButton[] {new InlineKeyboardButton { Text = "Previous", CallbackData = $"{callback.Message.Chat.Id} userbest previous {step} {splittedCallback[4]} {name}" },  new InlineKeyboardButton { Text = "Next", CallbackData = $"{callback.Message.Chat.Id} userbest next {step} {splittedCallback[4]} {name}" } }
+               new InlineKeyboardButton[] {new InlineKeyboardButton("Previous") { CallbackData = $"{callback.Message.Chat.Id} userbest previous {step} {splittedCallback[4]} {name}" },  new InlineKeyboardButton("Next") { CallbackData = $"{callback.Message.Chat.Id} userbest next {step} {splittedCallback[4]} {name}" } }
                );
             await bot.EditMessageTextAsync(callback.Message.Chat.Id, callback.Message.MessageId, textToSend, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: ik, disableWebPagePreview: true);
             await bot.AnswerCallbackQueryAsync(callback.Id);
