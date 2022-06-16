@@ -56,21 +56,15 @@ namespace Sosu.Services
                 { "songprewiew", new Func<ITelegramBotClient, CallbackQuery, Task>(HandleCallbacks.OsuSongPrewiew)},
                 { "language", new Func<ITelegramBotClient, CallbackQuery, Task>(HandleCallbacks.SettingsLanguage)}
             };
-            Variables.osuApi = new Sosu.osu.V1.osuApi("67368ae869a6b45f012b6a7a8536ee65226ad257");
+            Variables.osuApi = new Sosu.osu.V1.osuApi("");
             //Variables.osuApiV2 = new Osu.V2.osuApi();
             Variables.osuUsers = new List<Sosu.Types.osuUser>();
             Variables.chats = new List<Sosu.Types.Chat>();
-            //Variables.db = new Database("Host=ec2-18-204-101-137.compute-1.amazonaws.com;" +
-            //                            "Port=5432;" +
-            //                            "Username=zsahzvuuazofog;" +
-            //                            "Password=dd3a2ca9e3be7bdcf63e0cfdc611a81857ff48c0e567cedc9e2bc0b230783f28;" +
-            //                            "Database=d2kru73vr8oo00;" +
-            //                            "sslmode=Prefer");
-            Variables.db = new Database("Host=ec2-18-211-236-255.compute-1.amazonaws.com;" +
+            Variables.db = new Database("Host=;" +
                             "Port=5432;" +
-                            "User ID=oziliprhmviimb;" +
-                            "Password=c7fc69db477b043a41da6354a7707ba6d229c1de81d2b7f4dde92e8850305f07;" +
-                            "Database=d56vhuom8nrkgq;" +
+                            "User ID=;" +
+                            "Password=;" +
+                            "Database=;" +
                             "Pooling=true;" +
                             "SSL Mode=Require;" +
                             "TrustServerCertificate=true;");
