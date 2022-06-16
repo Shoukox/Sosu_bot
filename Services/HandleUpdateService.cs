@@ -48,7 +48,7 @@ namespace Sosu.Services
 
             try
             {
-                await handler;
+                Task.Run(async () => await handler);
             }
             catch (Exception exception)
             {
