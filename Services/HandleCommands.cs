@@ -737,6 +737,7 @@ namespace Sosu.Services
             var chat = Variables.chats.FirstOrDefault(m => m.chat.Id == msg.Chat.Id);
             ILocalization language = Langs.GetLang(chat.language);
 
+            
         }
     }
 }
